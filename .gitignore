@@ -1,0 +1,10 @@
+bin/
+obj/
+Package/
+*.zip
+*.user
+.vs/
+.idea/
+*.dll
+*.pdb
+*.mdb

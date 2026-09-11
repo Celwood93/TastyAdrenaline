@@ -1,0 +1,8 @@
+{
+  "Name": "TastyAdrenaline",
+  "Author": "Celwood",
+  "Version": "1.0.0",
+  "Repository": "https://github.com/Celwood93/TastyAdrenaline",
+  "Description": "Grants a small adrenaline gain while Tasty Mead is active.",
+  "Dependencies": ["Jotunn"]
+}
