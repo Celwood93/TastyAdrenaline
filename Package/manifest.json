@@ -1,0 +1,10 @@
+{
+  "name": "TastyAdrenaline",
+  "version_number": "1.0.0",
+  "website_url": "https://discord.gg/FvGrwCjE3B",
+  "description": "Grants a small adrenaline gain while Tasty Mead is active.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2202",
+    "ValheimModding-Jotunn-2.26.1"
+  ]
+}

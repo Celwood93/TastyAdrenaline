@@ -26,4 +26,10 @@
         <Exec
             Command="sh &quot;$(MSBuildProjectDirectory)/scripts/publish.sh&quot; --target &quot;$(Configuration)&quot; --target-path &quot;$(TargetDir)&quot; --target-assembly &quot;$(TargetFileName)&quot; --project-path &quot;$(MSBuildProjectDirectory)&quot;" />
     </Target>
+    <Target Name="PublishModOnWindows" AfterTargets="Build"
+        Condition="'$(OS)' == 'Windows_NT' and '$(Configuration)' == 'Release'">
+        <MakeDir Directories="$(MSBuildProjectDirectory)\Package\plugins" />
+        <Copy SourceFiles="$(TargetPath)"
+            DestinationFolder="$(MSBuildProjectDirectory)\Package\plugins" />
+    </Target>
 </Project>

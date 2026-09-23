@@ -1,11 +1,9 @@
-# Tasty Adrenaline
-
-Tasty Adrenaline adds a small adrenaline gain while Tasty Mead is active. It preserves the mead's original consume status effect.
+# Tasty Adrenaline Development
 
 ## Requirements
 
 - .NET SDK capable of building SDK-style .NET Framework projects
-- Valheim with BepInEx and Jotunn installed
+- Valheim with BepInEx and Jotunn installed for testing
 
 The project restores JotunnLib from NuGet. It does not include Valheim, BepInEx, Jotunn runtime files, or Unity assets.
 
@@ -16,22 +14,40 @@ dotnet restore
 dotnet build -c Debug
 ```
 
-Debug builds deploy the DLL and PDB to the first available location:
+The Debug DLL is created at `bin/Debug/net48/TastyAdrenaline.dll`.
+
+On Unix systems, Debug builds deploy the DLL and PDB to the first available location:
 
 1. `MOD_DEPLOYPATH`
 2. `$BEPINEX_PATH/plugins`
 3. `~/Library/Application Support/Steam/steamapps/common/Valheim/BepInEx/plugins`
 
-Before BepInEx is installed, the Debug build succeeds and reports that deployment was skipped.
+## Release Package
 
-Create a distributable package with:
+On Windows, run the packaging script from PowerShell:
 
-```sh
-dotnet build -c Release
+```powershell
+.\scripts\package-release.ps1
 ```
 
-The release build stages `Package/plugins/TastyAdrenaline.dll` and `README.md`, then creates `TastyAdrenaline.zip` when the `zip` command is available.
+If PowerShell blocks local scripts, run it for the current terminal session with:
 
-## Development
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\package-release.ps1
+```
 
-This initial project has no custom Unity asset bundles. Add a Unity project only when the mod needs custom prefabs, textures, or other assets.
+The Release package contains:
+
+```text
+Package/
+├── manifest.json
+├── README.md
+├── icon.png
+└── plugins/
+    └── TastyAdrenaline.dll
+```
+
+The script creates `TastyAdrenaline.zip` in the repository root with the contents of `Package` at the archive root, ready to upload to Thunderstore. On Unix systems, the existing Release build also creates the archive when the `zip` command is available.
+
+This project has no custom Unity asset bundles. Add a Unity project only when the mod needs custom prefabs, textures, or other assets.

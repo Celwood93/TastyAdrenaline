@@ -6,14 +6,14 @@ namespace TastyAdrenaline
 {
     public class SE_TastyAdrenaline : SE_Stats
     {
-        private const int TickIntervalSeconds = 2;
+        private const float TickIntervalSeconds = 1.95f;
         private bool isRunning;
 
         public SE_TastyAdrenaline()
         {
             m_ttl = 10f;
             m_name = "SE_TastyAdrenaline";
-            m_tooltip = "Slowly gain 1 adrenaline every 2 seconds while active.";
+            m_tooltip = "Slowly gain 1 adrenaline instantly and every 2 seconds while active.";
         }
 
         public override void Setup(Character character)
@@ -42,13 +42,13 @@ namespace TastyAdrenaline
                 tooltip.AppendLine(m_tooltip);
             }
 
-            tooltip.AppendFormat("<color=orange>Gain 1 adrenaline every {0}s for {1}s</color>", TickIntervalSeconds, m_ttl);
+            tooltip.AppendFormat("<color=orange>Gain 1 adrenaline instantly and every 2s for {0}s</color>", m_ttl);
             return tooltip.ToString();
         }
 
         private IEnumerator GainAdrenalineOverTime(Player player)
         {
-            var tickCount = Mathf.Max(1, Mathf.FloorToInt(m_ttl / TickIntervalSeconds));
+            var tickCount = Mathf.Max(1, Mathf.CeilToInt(m_ttl / TickIntervalSeconds));
             for (var tick = 0; tick < tickCount && isRunning && player != null; tick++)
             {
                 player.AddAdrenaline(1f);

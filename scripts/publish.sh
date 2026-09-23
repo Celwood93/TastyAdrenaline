@@ -44,10 +44,9 @@ fi
 
 if [ "$target" = "Release" ]; then
     package_path="$project_path/Package"
-    rm -rf "$package_path"
     mkdir -p "$package_path/plugins"
+    rm -f "$package_path/plugins/$target_assembly"
     cp "$target_path/$target_assembly" "$package_path/plugins/"
-    cp "$project_path/README.md" "$package_path/"
 
     if command -v zip >/dev/null 2>&1; then
         archive_path="$project_path/$plugin_name.zip"
