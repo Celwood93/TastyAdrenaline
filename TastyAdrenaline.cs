@@ -1,5 +1,6 @@
 using System;
 using BepInEx;
+using BepInEx.Configuration;
 using Jotunn.Entities;
 using Jotunn.Managers;
 using UnityEngine;
@@ -14,8 +15,38 @@ namespace TastyAdrenaline
         public const string PluginName = "Tasty Adrenaline";
         public const string PluginVersion = "1.0.0";
 
+        internal static ConfigEntry<float> AdrenalinePerTick { get; private set; }
+        internal static ConfigEntry<float> InitialAdrenalineAmount { get; private set; }
+        internal static ConfigEntry<float> FinalAdrenalineAmount { get; private set; }
+        internal static ConfigEntry<float> AdrenalineMultiplier { get; private set; }
+
         private void Awake()
         {
+            AdrenalinePerTick = Config.Bind(
+                "General",
+                "AdrenalinePerTick",
+                1f,
+                "Amount of adrenaline gained on each regular tick.");
+
+            InitialAdrenalineAmount = Config.Bind(
+                "General",
+                "InitialAdrenalineAmount",
+                0f,
+                "Amount of adrenaline gained on use of Tasty Mead. Defaults to 0, which uses AdrenalinePerTick.");
+
+            FinalAdrenalineAmount = Config.Bind(
+                "General",
+                "FinalAdrenalineAmount",
+                0f,
+                "Amount of adrenaline gained when the effects of Tasty Mead fade. Defaults to 0, which uses AdrenalinePerTick.");
+
+            AdrenalineMultiplier = Config.Bind(
+                "General",
+                "AdrenalineMultiplier",
+                1f,
+                "Multiplier applied to other positive adrenaline gains while Tasty Mead is active. This does not affect the adrenaline gained from the Tasty Adrenaline status effect.");
+
+            AdrenalinePatch.Apply();
             Jotunn.Logger.LogInfo("Tasty Adrenaline loaded");
             PrefabManager.OnVanillaPrefabsAvailable += PatchTastyMead;
         }
