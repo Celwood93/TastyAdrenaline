@@ -1,6 +1,6 @@
 {
   "name": "TastyAdrenaline",
-  "version_number": "1.0.0",
+  "version_number": "1.0.1",
   "website_url": "https://discord.gg/FvGrwCjE3B",
   "description": "Grants a small adrenaline gain while Tasty Mead is active.",
   "dependencies": [

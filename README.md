@@ -43,6 +43,7 @@ The Release package contains:
 Package/
 ├── manifest.json
 ├── README.md
+├── CHANGELOG.md
 ├── icon.png
 └── plugins/
     └── TastyAdrenaline.dll

@@ -19,12 +19,12 @@ namespace TastyAdrenaline
             isMultiplierActive = isActive;
         }
 
-        internal static void AddPotionGain(float amount)
+        internal static void AddPotionGain(float v)
         {
             isPotionGainActive = true;
             try
             {
-                Player.m_localPlayer.AddAdrenaline(amount);
+                Player.m_localPlayer.AddAdrenaline(v);
             }
             finally
             {
@@ -35,14 +35,14 @@ namespace TastyAdrenaline
         [HarmonyPatch(typeof(Player), nameof(Player.AddAdrenaline))]
         private static class PlayerAddAdrenalinePatch
         {
-            private static void Prefix(ref float amount)
+            private static void Prefix(ref float v)
             {
-                if (!isMultiplierActive || isPotionGainActive || amount <= 0f)
+                if (!isMultiplierActive || isPotionGainActive || v <= 0f)
                 {
                     return;
                 }
 
-                amount *= TastyAdrenalinePlugin.AdrenalineMultiplier.Value;
+                v *= TastyAdrenalinePlugin.AdrenalineMultiplier.Value;
             }
         }
     }

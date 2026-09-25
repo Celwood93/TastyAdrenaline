@@ -73,11 +73,11 @@ namespace TastyAdrenaline
 
         private IEnumerator GainAdrenalineOverTime(Player player)
         {
-            var tickCount = Mathf.Max(1, Mathf.FloorToInt(m_ttl / TickIntervalSeconds));
+            var tickCount = Mathf.Max(1, Mathf.CeilToInt(m_ttl / TickIntervalSeconds));
             for (var tick = 0; tick < tickCount && isRunning && player != null; tick++)
             {
                 AdrenalinePatch.AddPotionGain(GetAdrenalineAmountForTick(tick, tickCount));
-                if (tick < tickCount)
+                if (tick < tickCount-1)
                 {
                     yield return new WaitForSeconds(TickIntervalSeconds);
                 }

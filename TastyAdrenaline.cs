@@ -13,7 +13,7 @@ namespace TastyAdrenaline
     {
         public const string PluginGuid = "com.celwood.tastyadrenaline";
         public const string PluginName = "Tasty Adrenaline";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.1";
 
         internal static ConfigEntry<float> AdrenalinePerTick { get; private set; }
         internal static ConfigEntry<float> InitialAdrenalineAmount { get; private set; }
